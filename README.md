@@ -1,5 +1,5 @@
 # Jetbrains Blocker
-*A rudimentry program to block Jetbrain's authorization servers*
+*A rudimentary program to block Jetbrain's authorization servers*
 
 ## How to use:
 1. Download the latest release 
