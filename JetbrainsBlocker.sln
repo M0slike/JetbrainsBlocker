@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetbrainsBlocker", "JetbrainsBlocker\JetbrainsBlocker.csproj", "{6331CCBA-B6C8-44B4-97A8-13416EA55F48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6331CCBA-B6C8-44B4-97A8-13416EA55F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6331CCBA-B6C8-44B4-97A8-13416EA55F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6331CCBA-B6C8-44B4-97A8-13416EA55F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6331CCBA-B6C8-44B4-97A8-13416EA55F48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
