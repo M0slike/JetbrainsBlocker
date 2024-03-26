@@ -4,13 +4,14 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using WindowsFirewallHelper;
 using WindowsFirewallHelper.Addresses;
-using WindowsFirewallHelper.COMInterop;
+using static System.Security.Principal.WindowsIdentity;
 public class Program {
 	const string AccountUrl = "account.jetbrains.com";
-	private static bool IsAdministrationRules() {
+	static bool IsAdministrationRules() {
 		try {
-			using (WindowsIdentity identity = WindowsIdentity.GetCurrent()) {
-				return (new WindowsPrincipal(identity)).IsInRole(WindowsBuiltInRole.Administrator);
+			WindowsIdentity identity = GetCurrent();
+			using (identity) {
+				return new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator);
 			}
 		} catch {
 			return false;
@@ -20,10 +21,9 @@ public class Program {
 		// check if we're on windows
 		if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 		{
-			Error("This program requires administrative privileges.");
+			Error("This program only runs on Windows.");
 			Error("Press any key to exit...");
 			return 196;
-			// Do something
 		}
 		if (!IsAdministrationRules()) {
 			//Console.ForegroundColor = ConsoleColor.Red;
@@ -87,6 +87,8 @@ public class Program {
 			return 5;
 		}
 	}
+	
+	
 
 	static void Error(string message) {
 		Console.ForegroundColor = ConsoleColor.Red;
