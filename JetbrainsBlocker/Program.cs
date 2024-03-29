@@ -5,7 +5,7 @@ using System.Security.Principal;
 using WindowsFirewallHelper;
 using WindowsFirewallHelper.Addresses;
 using static System.Security.Principal.WindowsIdentity;
-public class Program {
+public static class Program {
 	const string AccountUrl = "account.jetbrains.com";
 	static bool IsAdministrationRules() {
 		try {
@@ -39,11 +39,15 @@ public class Program {
 			Error("Invalid path, try again. Make sure to include the .exe extension.");
 			riderPath = Console.ReadLine();
 		}
+		// get the name of the executable
+		string executableName = Path.GetFileNameWithoutExtension(riderPath);
+		Console.WriteLine($"Blocking JetBrains for {executableName}...");
 		Console.ForegroundColor = ConsoleColor.White;
 		try {
 			// clean up 
 			// this is to ensure that we don't have multiple rules with the same name, and bloat the firewall rules
-			var oldRule = FirewallManager.Instance.Rules.FirstOrDefault(r => r.Name == "JetbrainsBlocker");
+			// for multiple application support we check if the name of the rule contains the executable name 
+			var oldRule = FirewallManager.Instance.Rules.FirstOrDefault(r => r.Name == $"JetbrainsBlocker - {executableName}");
 			if (oldRule != null) {
 				FirewallManager.Instance.Rules.Remove(oldRule);
 			}
@@ -51,8 +55,8 @@ public class Program {
 			var newAppRule = FirewallManager.Instance.CreateApplicationRule(
 				// ensure this rule is applied to all profiles
 				FirewallProfiles.Private | FirewallProfiles.Public | FirewallProfiles.Domain,
-				// give it a name 
-				"JetbrainsBlocker",
+				// give it a name with the executable name
+				$"JetbrainsBlocker - {executableName}",
 				// block rider
 				FirewallAction.Block,
 				// set the path to the rider executable
@@ -87,8 +91,6 @@ public class Program {
 			return 5;
 		}
 	}
-	
-	
 
 	static void Error(string message) {
 		Console.ForegroundColor = ConsoleColor.Red;
