@@ -1,6 +1,9 @@
 # Jetbrains Blocker
 *A rudimentary program to block Jetbrain's authorization servers*
 
+You can find JetbrainsBlock's successor program, JetbrainsInspector, here:
+https://github.com/AwokeinanEnigma/JetbrainsInspector
+
 ## How to use:
 1. Download the latest release 
 2. Extract the zip folder
